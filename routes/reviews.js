@@ -3,8 +3,8 @@ var router = express.Router();
 const reviewsCtrl = require('../controllers/reviews');
 
 router.get("/games/:id/new", isLoggedIn, reviewsCtrl.new);
-router.post("/games/:id/reviews", reviewsCtrl.create);
-router.delete("/games/:id/reviews/:rid", reviewsCtrl.delete)
+router.post("/games/:id/reviews", isLoggedIn, reviewsCtrl.create);
+router.delete("/games/:id/reviews/:rid", isLoggedIn, reviewsCtrl.delete)
 
 module.exports = router;
 
