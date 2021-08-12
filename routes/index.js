@@ -7,7 +7,7 @@ const Game = require("../models/game");
 router.get("/", function(req, res, next) {
   Game.find({"reviews.0": {$exists: true}}, function(err, games) {
     res.render("index", { 
-      title: "Game Catalog", 
+      title: "Games Catalog", 
       user: req.user,
       games
     });
