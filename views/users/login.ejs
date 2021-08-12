@@ -1,0 +1,28 @@
+<%- include("../partials/header") %>
+
+<div class="error">
+    <% if(message) { %>
+        <li><%=message %></li>
+    <% }%>
+    </div>
+
+<div class="container">
+    <div class="jumbotron">
+    <div class="forms">
+        <div class="form-header desc">LOGIN</div>
+    <form action="/login" method="POST" autocomplete="off">
+        <div class="text desc">Username:</div><div><input class="form-control" type="text" name="username"></div>
+        <div class="text desc">Password:</div><div><input class="form-control" type="password" name="password"></div>
+        <button id="login" type="submit" class="btn btn-outline-primary">Log In</button>
+        <div class="text member">Not a member? <a href="/users/signup">Signup now</a></div>
+        <div>----or----</div>
+        <div class="btn-group">
+            <a class="btn btn-danger disabled"><i class="fa fa-google-plus"></i></a>
+            <a href="/auth/google" class="btn btn-danger"> Sign in with Google</a>
+        </div>
+            
+    </form>
+</div>
+</div>
+
+<%- include("../partials/footer") %>

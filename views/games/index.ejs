@@ -1,0 +1,93 @@
+<%- include('../partials/header') %>
+<div class="container">
+    <div class="jumbotron game">
+    <form action="/games" methods="GET" class="form-inline search">
+        <div class="input-group">
+            <input type="text" name="search" placeholder="Search for Games..." class="form-control" id="search-input">
+            <span class="input-group-btn">
+                <button class="btn btn-outline-primary searchbtn" id="btn" type="submit">Search</button>
+            </span>
+        </div>
+    </form>
+
+    <ul>
+    <% game.forEach(function(g) { %>
+        <li>
+            <a href="/games/<%=g._id%>"><div class="image"><img src="<%= g.header_image %>"/></a></div>
+            <div class="info"><div><a href="/games/<%=g._id%>" class="special-font"><%=g.name%></a></div>
+            <div class="desc"><%=g.developers%></div>
+            <div class="list desc">
+                <%g.platforms.slice(0, -1).forEach(function(p){ %>
+                    <div><%=p%>, </div>
+                <% })%>
+                <div><%= g.platforms[g.platforms.length-1] %></div>
+            </div>
+        </div>
+        <div class="rating">
+        <div class="special-font desc">Rating: <%=g.rating_star%></div>
+        <% if((!isNaN(g.rating_star)) || (parseInt(g.rating_star))===0) { %>
+          <div class="stars-outer">
+            <div class="stars-inner" data-rating="<%=g.rating_star%>"></div>
+          </div>
+        <% } else { %>
+          <div class="special-font desc">Not rated</div>
+        <% }%>
+
+        <div>
+            <% if (user) { %>
+                <form action="/games/<%=g._id%>/likes" method="POST">
+                    <input class="btn btn-outline-primary" type="submit" name="watches" value="Watch" <%=user.watches.includes(g._id)? 'disabled' : ''%>>
+                </form>
+            <%} else { %>
+                <form action="/users/login">
+                    <input class="btn btn-outline-primary" type="submit" value="Watch" />
+                </form>
+            <% }%>
+        </div>
+        </div>
+        </li>
+    <% }) %>
+    </ul>
+    
+    <div class="page">
+
+    <% if (query) { %>
+        <a href="/games?search=<%=query%>&page=1&limit=10">First page</a>
+        <a href="/games?search=<%=query%>&page=<%=page == 1? page : page-1%>&limit=10"><</a>
+
+    <%} else {%>
+        <a href="/games?page=1&limit=10">First page</a>
+        <a href="/games?page=<%=page == 1? page : page-1%>&limit=10"><</a>
+    <% } %>
+
+    <%pageFooter.forEach(function(p) { %>
+        <% if(query) { %>
+            <a href="/games?search=<%=query%>&page=<%=p%>&limit=10"
+                class="<%=page == p ?'selected': ''%>"><%=p%></a>
+        <% } else {%>
+        <a href="/games?page=<%=p%>&limit=10"
+           class="<%=page == p ?'selected': ''%>"><%=p%></a>
+        <%}})%>
+
+    <% if (query) { %>    
+        <a href="/games?search=<%=query%>&page=<%=page == totalPage? parseInt(page): parseInt(page)+1%>&limit=10">></a>
+        <a href="/games?search=<%=query%>&page=<%=totalPage%>&limit=10">Last page</a>
+        
+    <%} else {%>
+        <a href="/games?page=<%=page == totalPage? parseInt(page): parseInt(page)+1%>&limit=10">></a>
+        <a href="/games?page=<%=totalPage%>&limit=10">Last page</a>
+
+    <% } %>    
+    </div>
+</div>
+</div>
+</div>
+<%- include('../partials/footer') %>
+
+<script>
+    const stars = document.querySelectorAll(".stars-inner");
+    stars.forEach(function(star) {
+        let starInnerWidth = star.getAttribute("data-rating");
+        star.style.width = (parseFloat(starInnerWidth)/ 5) * 100 + "%"
+    })
+</script>

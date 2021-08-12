@@ -1,0 +1,31 @@
+<%- include('../partials/header') %>
+
+    <div class="error">
+        <% errors.forEach(function(e){ %>
+            <li><%=Object.values(e)%></li>
+        <% }) %>
+    </div>
+
+<div class="container">
+    <div class="jumbotron">
+    <div class="forms">
+        <div class="form-header desc">SIGNUP</div>
+    <form action="/users" method="POST" autocomplete="off">
+        <div class="text desc">Username:</div>
+        <div><input type="text" name="username" class="form-control" required></div>
+        <div class="text desc">Email:</div>
+        <div><input type="text" name="email" class="form-control" placeholder="example@domain.com" required></div>
+        <div class="text desc">Email confirmation:</div>
+        <div><input type="dat" name="emailc" class="form-control" placeholder="example@domain.com" required></div>
+        <div class="text desc">Password(Min 6 characters):</div>
+        <div><input type="password" name="password" class="form-control" minlength="6" required></div>
+        <div class="text desc">Password confrimation:</div>
+        <div><input type="password" name="passwordc" class="form-control" minlength="6" required></div>
+        <div><button id="signup" class="btn btn-outline-primary" type="submit">Sign Up</button></div>
+    </form>
+</div>
+
+<%- include('../partials/footer') %>
+
+
+

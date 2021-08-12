@@ -1,0 +1,84 @@
+<%- include('../partials/header') %>
+
+<main>
+  <div class="container">
+    <div class="jumbotron special-font desc">
+      <% if(user && u._id.toString()=== user._id.toString()) { %>
+          <h2><%=greeting%> <%= u.username%>!</h2>
+          <% } else { %>
+          <h2>Account name: <%= u.username%></h2>
+          <%}%>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <h3 class="special-font">Avatar</h3>
+        <img class="user-avatar" src="<%= u.avatar%>" />
+        <% if(user && u._id.toString()=== user._id.toString()) { %>
+        <form action="/users/upload" method="POST"
+          enctype="multipart/form-data">
+          <input type="file" name="image" />
+          <input type="submit" class="btn btn-outline-primary" id="btn"/>
+        </form>
+       
+        <% } %>
+      </div>
+      <div class="col-sm-5">
+        <h3 class="special-font">User Information</h3>
+        <p>Username: <%= u.username%></p>
+        <p>Email: <%= u.email%></p>
+        <p>Joined On: <%= u.createdAt.toLocaleDateString() %></p>
+        <p>Last Update: <%= u.updatedAt.toLocaleDateString() %></p>
+
+      </div>
+      <div class="col-sm-3">
+        <h3 class="special-font">Friends</h3>
+      </div>
+      <div class="col-sm-9">
+        <h3 class="special-font">Game Watch-list</h3>
+        <% if (u.watches.length) { %>
+          <% u.watches.forEach(function(w){ %>
+            <li class="user-watchlist">
+              <a href="/games/<%=w._id%>"><img class="user-game-image" src="<%= w.header_image %>"/> <%=w.name%></a>
+              <form action="/games/<%=w._id%>/likes?_method=DELETE" method="POST">
+                <% if (user && u._id.toString()=== user._id.toString()) { %>
+                <button class="btn btn-outline-primary" id="btn" type="submit" display="">
+                  Remove
+                </button>
+                <% } %>
+              </form>
+            </li>
+            <% }); %>
+        <%} else { %>
+            <h5>Currently not watching any games</h5>         
+        <% } %>
+      </div>
+
+      <div class="col-sm-12">
+        <h3 class="special-font">Reviews</h3>
+        <% if (gameWithReview.length) { %>
+          <% gameWithReview.forEach(function(r) { %>
+            <% r.reviews.forEach(function(info) { %>
+              <div class="col-sm-6" id="r">
+               <li id="review-box">
+                <div id="review-rating">
+                  <div id="user-review"><a href="/games/<%=r._id%>"><img class="user-game-image" src="<%=r.header_image%>"></a>
+                  <a href="/games/<%=r._id%>"><%=r.name%></a>
+                </div>    
+                <div>Rating: <%=info.rating %>/5 </div>
+              </div>
+              <div><%=info.review%></div>
+              </li>
+            </div>
+            <% }) %>
+          <% }) %>
+
+        <%} else { %>
+        <h5>No game reviews yet!</h5>
+        <% } %>
+
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="https://use.fontawesome.com/cf4ada00be.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <header>
+        <a href="/"><div>HOME</div></a>
+        <a href="/games"><div>GAMES</div></a>
+        <% if(user) {%>
+            <a href="/games/new"><div>NEW GAME</div></a>
+            <a href="/users/<%=user._id%>"><div><%=user.username %></div></a>
+            <a href="/logout"><div>LOG OUT</div></a>
+        <% } else { %>
+            <a href="/users/login"><div>LOG IN</div></a>
+        <%}%>
+    </header>

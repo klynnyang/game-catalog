@@ -1,0 +1,119 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-sm-12 game-header"><h2 class="special-font"><%=g.name%></h2></div>
+    <div class="col-sm-6">
+<img src="<%= g.header_image %>"/>
+</div>
+<div class="col-sm-6">
+<strong>Release Date</strong>: <%=g.release_date.toLocaleDateString()%></br>
+<strong>Developers</strong>: <%=g.developers%></br>
+<strong>Publishers</strong>: <%=g.publishers%></br>
+<strong>Rating</strong>: <%=g.rating_star%>
+<% if((!isNaN(g.rating_star)) || (parseInt(g.rating_star))===0) { %>
+  <div class="stars-outer">
+    <div class="stars-inner" data-rating="<%=g.rating_star%>"></div>
+  </div>
+<% } else { %>
+  No rating
+<% }%>
+</br>
+
+<strong>Supported Languages</strong>: 
+<div class="list">
+  <%g.supported_languages.slice(0, -1).forEach(function(s){ %>
+    <%=s%>, 
+  <% })%>
+  <%= g.supported_languages[g.supported_languages.length-1] %>
+</div>
+
+<strong>Genres</strong>: 
+<div class="list">
+  <%g.genres.slice(0, -1).forEach(function(ge){ %>
+    <%=ge%>, 
+  <% })%>
+  <%= g.genres[g.genres.length-1] %>
+</div>
+
+<strong>Categories</strong>: 
+<div class="list">
+  <%g.categories.slice(0, -1).forEach(function(c){ %>
+    <%=c%>, 
+  <% })%>
+  <%= g.categories[g.categories.length-1] %>
+</div>
+
+<strong>Supported Platforms</strong>: 
+<div class="list">
+  <%g.platforms.slice(0, -1).forEach(function(p){ %>
+    <div><%=p%>, </div>
+<% })%>
+<div><%= g.platforms[g.platforms.length-1] %></div>
+</div>
+
+<% if (user && user.role === "admin"){ %>
+<div id="buttons">
+  <form action="/games/<%=g._id%>/update">
+    <input button class="btn btn-outline-primary" id="btn" type="submit" value="UPDATE"/>
+  </form>
+  <form action="/games/<%=g._id%>?_method=DELETE" method="POST">
+    <button class="btn btn-outline-primary" type="submit" id="btn">DELETE</button>
+  </form>
+
+</div>
+
+
+
+
+<% } %>
+
+</br>
+</div>
+<div class="col-sm-12">
+  <strong>Reviews:</strong>
+</div>
+<div class="col-sm-12 review">
+  <ul>
+    <% if (g.reviews.length) { %>
+      <% g.reviews.forEach(function(r) { %>
+      <li class="game-review">
+        <div id="review-avatar"><a href="/users/<%=r.userID%>"><img class="user-avatar" src="<%= r.avatar %>"></a>
+          <a href="/users/<%=r.userID%>"><%= r.username %></a></div>
+        <div id="review">
+          <strong>Rating: <%= r.rating%> out of 5</strong>
+          <%= r.review %>
+        </div>
+        <% if((user && user.id.toString() === r.userID.toString())
+        || (user && user.role === "admin")){ %>
+          <form method="POST" id="delete-review" action="/games/<%= g._id %>/reviews/<%= r._id %>?_method=DELETE"><input type="submit"
+            value="Delete" class="btn btn-outline-primary" id="btn"/>
+          </form>
+        <% } %>
+      </li>
+      <% })} else { %>
+        <h5>Be the first one to leave a review!</h5>
+      <% } %>
+    </ul>
+    <% if (user) { %>
+      <% let reviewed = g.reviews.some(r => r.userID.toString() === user._id.toString()) %>
+    <% if (user && !reviewed) { %>
+      <a class="review-link" href="/games/<%=g._id%>/new">Add a review</a>
+    <% } else if (user && reviewed) { %>
+      <h5>Thank you for leaving a review!</h5>
+    <% }} else { %>
+      <a class="review-link" href="/users/login">Add a review</a>
+    <%}%>
+
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
+<script>
+
+const star = document.querySelector(".stars-inner");
+let starInnerWidth = star.getAttribute("data-rating");
+star.style.width = (parseFloat(starInnerWidth)/ 5) * 100 + "%"
+
+</script>

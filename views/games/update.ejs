@@ -1,0 +1,70 @@
+<%- include('../partials/header') %>
+
+<div class="error">
+    <% if(message) { %>
+        <li><%=message %></li>
+    <% }%>
+    </div>
+
+<div class="container">
+    <div class="jumbotron desc">
+    <form action="/games/<%= game._id %>?_method=PUT" method="POST" enctype="multipart/form-data">        
+        <h2>Update Information for <%=game.name%></h2>
+
+        <div class="form-style">
+        <label class="form-label">Header Image</label>
+            <input class="form-control" type="file" name="image">
+        </div>
+
+        <div class="form-style">
+        <label class="form-label">Game Name</label>
+        <input class="form-control" id="disabled" type="text" name="name" value="<%=game.name%>" readonly disabled>
+        </div>
+
+        <div class="form-style">
+        <label class="form-label">Developers</label>
+        <input type="text" class="form-control" id="disabled" name="developers" value="<%=game.developers %>" readonly disabled>
+        </div>
+
+        <div class="form-style">
+        <label class="form-label">Publishers</label>
+        <input type="text" class="form-control" id="disabled" name="publishers" value="<%=game.publishers %>" readonly disabled>
+        </div>
+
+        <div class="form-style">
+        <label class="form-label">Platforms</label>
+        <input type="text" class="form-control" name="platforms" value="<%=game.platforms%>" required>
+        </div>
+   
+        <div class="form-style">
+        <label class="form-label">Categories</label>
+        <input type="text" class="form-control" name="categories" value="<%=game.categories %>" required >
+        </div>
+
+        <div class="form-style">
+        <label class="form-label">Supported Languages</label>
+        <input type="text" class="form-control" name="supported_languages" value="<%=game.supported_languages %>" required>
+        </div>
+
+        <div class="form-style">
+        <label class="form-label">Genres</label>
+        <input type="text" class="form-control" name="genres" value="<%=game.genres %>" required>
+        </div>
+
+        <div class="form-style">
+        <label class="form-label">Release Date</label><div><input class="form-control" type="date" name="release_date" value="<%=game.release_date.toLocaleDateString()%>"></div>
+        </div>
+        <div class="text-center">
+        <button class="btn btn-outline-primary new-game-btn" id="btn" type="submit">SUBMIT</button>
+        </div>
+    </form>
+</div>
+</div>
+
+
+
+
+
+
+
+<%- include('../partials/footer') %>

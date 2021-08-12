@@ -1,0 +1,85 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+    <div class="jumbotron desc">
+    <form action="/games" method="POST" autocomplete="off" enctype="multipart/form-data">
+        <h2>Add a new game</h2>
+
+        <div class="form-style">
+        <label class="form-label">Header Image</label>
+            <input class="form-control" type="file" name="image" required>
+        </div>
+
+        <div class="form-style">
+        <label class="form-label">App ID</label>
+        <input class="form-control" type="number" name="steam_appid" required min="0">
+        </div>
+
+        <div class="form-style">
+        <label class="form-label">Game Name</label>
+        <input class="form-control" type="text" name="name" required>
+        </div>
+
+        <div class="form-style">
+        <label class="form-label">Developers</label>
+        <input type="text" class="form-control" name="developers" required>
+        </div>
+
+        <div class="form-style">
+        <label class="form-label">Publishers</label>
+        <input type="text" class="form-control" name="publishers" required>
+        </div>
+
+        <div class="form-style">
+        <label class="form-label">Platforms</label>
+            <input class="form-check-input" type = "checkbox" name="platforms" value="windows">Windows
+            <input class="form-check-input" type = "checkbox" name="platforms"  value="mac">Mac
+            <input class="form-check-input" type = "checkbox" name="platforms"  value="linux">Linux
+       </div>
+   
+       <div class="form-style">
+        <label class="form-label">Categories</label>
+            <input class="form-check-input" type = "checkbox" name="categories" value="Single-Player">Single-Player
+            <input class="form-check-input" type = "checkbox" name="categories"  value="Multi-Player">Multi-Player
+            <input class="form-check-input" type = "checkbox" name="categories"  value="PvP">PvP
+            <input class="form-check-input" type = "checkbox" name="categories"  value="Co-op">Co-op
+            <input class="form-check-input" type = "checkbox" name="categories"  value="Controller support">Controller support
+        </div>
+
+        <div class="form-style">
+        <label class="form-label">Supported Languages</label>
+            <input class="form-check-input" type = "checkbox" name="supported_languages" value="English">English
+            <input class="form-check-input" type = "checkbox" name="supported_languages"  value="French">French
+            <input class="form-check-input" type = "checkbox" name="supported_languages"  value="German">German
+            <input class="form-check-input" type = "checkbox" name="supported_languages"  value="Russian">Russian
+            <input class="form-check-input" type = "checkbox" name="supported_languages"  value="Spanish-Spain">Spanish-Spain
+            <input class="form-check-input" type = "checkbox" name="supported_languages"  value="Simplified Chinese">Simplified Chinese
+            <input class="form-check-input" type = "checkbox" name="supported_languages"  value="Traditional Chinese">Traditioinal Chinese
+            <input class="form-check-input" type = "checkbox" name="supported_languages"  value="Korean">Korean
+            <input class="form-check-input" type = "checkbox" name="supported_languages"  value="Japanese">Japanese
+        </div>
+
+        <div class="form-style">
+        <label class="form-label">Genres</label>
+            <input class="form-check-input" type = "checkbox" name="genres" value="Indie">Indie
+            <input class="form-check-input" type = "checkbox" name="genres"  value="Action">Action
+            <input class="form-check-input" type = "checkbox" name="genres"  value="Casual">Casual
+            <input class="form-check-input" type = "checkbox" name="genres"  value="Adventure">Adventure
+            <input class="form-check-input" type = "checkbox" name="genres"  value="Strategy">Strategy
+            <input class="form-check-input" type = "checkbox" name="genres"  value="Simulation">Simulation
+            <input class="form-check-input" type = "checkbox" name="genres"  value="RPG">RPG
+            <input class="form-check-input" type = "checkbox" name="genres"  value="Free to Play">Free to Play
+        </div>
+
+        <div class="form-style">
+        <label class="form-label">Release Date</label><div><input class="form-control" type="date" name="release_date" required></div>
+        </div>
+        <div class="text-center">
+        <button class="btn btn-outline-primary new-game-btn" id="btn" type="submit">SUBMIT</button>
+        </div>
+    </form>
+</div>
+</div>
+
+    <%- include('../partials/footer') %>
+
