@@ -10,13 +10,13 @@ The Games Catalog application is built using NodeJS, Express and MongoDB. The da
 
 <h2><b>Database Information</b></h2>
 The raw data for the database was acquired through Steam Web API from a previous project linked below:
-<p><a hre="https://github.com/klynnyang/Steam_games_analysis">https://github.com/klynnyang/Steam_games_analysis</a>
+<p><a href="https://github.com/klynnyang/Steam_games_analysis">Steam game analysis</a>
 <p>The data encapsulates majority of the games available on Steam as of May 2021. The information may not be accurate and is used for prototype testing only.
 
 <p>
 <h2><b>Getting Started</b></h2>
 This application is accessable through the link below:
-<p><a hre="https://catalog-for-games.herokuapp.com/">https://catalog-for-games.herokuapp.com/</a>
+<p><a href="https://catalog-for-games.herokuapp.com/">here</a>
 
 <h3><u>Application Features</u></h3>
 <li>This application is made to be mobile compatiable</li>
